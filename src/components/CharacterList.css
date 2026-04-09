@@ -1,0 +1,7 @@
+.blocImage {
+  display: flex;
+  flex-wrap: wrap;
+}
+.element {
+    width: 11rem
+}
