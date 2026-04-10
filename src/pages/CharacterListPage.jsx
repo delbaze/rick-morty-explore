@@ -1,9 +1,9 @@
 import "./CharacterListPage.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import CharacterList from "../components/CharacterList";
 import SearchModule from "../components/SearchModule";
 import Pagination from "../components/Pagination";
-
+import { FavoritesContext } from "../contexts/FavoritesContext";
 const DEFAULT_URL = "https://rickandmortyapi.com/api/character/";
 
 function CharacterListPage() {
