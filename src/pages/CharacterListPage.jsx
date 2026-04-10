@@ -19,6 +19,10 @@ function CharacterListPage() {
 
       const res = await fetch(urlObj.toString());
       if (!res.ok) {
+        if (res.status == 404) {
+          setCharacters([]);
+          return;
+        }
         setError("Il y a eu une erreur");
         return;
       }
@@ -57,13 +61,13 @@ function CharacterListPage() {
     <div>
       <SearchModule handleSubmit={handleSubmit} />
       <CharacterList characters={characters} />
-      <button
+      {/* <button
         onClick={() => {
           setPage(page + 1);
         }}
       >
         Page suivante
-      </button>
+      </button> */}
     </div>
   );
 }
