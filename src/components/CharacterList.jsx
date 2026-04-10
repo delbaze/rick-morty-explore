@@ -1,17 +1,29 @@
+import { useFavorites } from "../contexts/FavoritesContext";
 import "./CharacterList.css";
 import { Link } from "react-router";
 function CharacterList({ characters }) {
+  const { isFavorite, addFavorites, removeFromFavorites } = useFavorites();
   return (
     <div className="blocImage">
       {characters.length > 0 ? (
         characters.map((c) => {
+          const isFav = isFavorite(c.id);
           return (
             <div key={c.id} className="element">
-              {/* <div key={c.id} style={{ width: 200 }}> */}
               <Link to={`/character/${c.id}`}>
                 <img src={c.image} width={150} />
               </Link>
-              <p>{c.name}</p>
+              <div>
+                <p>{c.name}</p>
+                <button
+                  style={{ backgroundColor: isFav ? "green" : "gray" }}
+                  onClick={() =>
+                    isFav ? removeFromFavorites(c.id) : addFavorites(c.id)
+                  }
+                >
+                  {isFav ? "-" : "+"}
+                </button>
+              </div>
             </div>
           );
         })
