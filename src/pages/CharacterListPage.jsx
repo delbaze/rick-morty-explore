@@ -2,6 +2,7 @@ import "./CharacterListPage.css";
 import { useState, useEffect } from "react";
 import CharacterList from "../components/CharacterList";
 import SearchModule from "../components/SearchModule";
+import Pagination from "../components/Pagination";
 
 const DEFAULT_URL = "https://rickandmortyapi.com/api/character/";
 
@@ -9,6 +10,7 @@ function CharacterListPage() {
   const [characters, setCharacters] = useState([]);
   const [url, setUrl] = useState(DEFAULT_URL);
   const [page, setPage] = useState(1);
+  const [pagesArray, setPageArray] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -28,6 +30,7 @@ function CharacterListPage() {
       }
       const data = await res.json();
       console.log(data);
+      setPageArray(Array.from({ length: data.info.pages }, (_, i) => i + 1));
       setLoading(false);
       if (data) {
         setCharacters(data.results);
@@ -48,6 +51,7 @@ function CharacterListPage() {
     if (gender && gender !== "all") {
       params.set("gender", gender);
     }
+    setPage(1);
     setUrl(`${urlBase}?${params.toString()}`);
   };
   if (loading) {
@@ -60,7 +64,9 @@ function CharacterListPage() {
   return (
     <div>
       <SearchModule handleSubmit={handleSubmit} />
+      <Pagination pagesArray={pagesArray} page={page} setPage={setPage} />
       <CharacterList characters={characters} />
+      <Pagination pagesArray={pagesArray} page={page} setPage={setPage} />
       {/* <button
         onClick={() => {
           setPage(page + 1);
