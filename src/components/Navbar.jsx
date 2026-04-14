@@ -1,11 +1,24 @@
 import { NavLink } from "react-router";
+import { useSelector, useDispatch } from "react-redux";
+import { toggleTheme } from "../slices/themeSlice";
+import { actualTheme } from "../slices/themeSelectors";
 
 function Navbar() {
+  const theme = useSelector(actualTheme);
+  const dispatch = useDispatch();
+
   return (
-    <nav>
-      <NavLink to="/">Accueil</NavLink>
-      <NavLink to="/characters-list">Liste de personnages</NavLink>
-      <NavLink to="/about">À propos</NavLink>
+    <nav style={{ display: "flex", justifyContent: "space-between" }}>
+      <div>
+        <NavLink to="/">Accueil</NavLink>
+        <NavLink to="/characters-list">Personnages</NavLink>
+        <NavLink to="/demo-reducer">Démo reducer</NavLink>
+        <NavLink to="/todos-list">TodosList</NavLink>
+        <NavLink to="/about">À propos</NavLink>
+      </div>
+      <div>
+        Theme: <button onClick={() => dispatch(toggleTheme())}>{theme}</button>
+      </div>
     </nav>
   );
 }

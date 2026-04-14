@@ -5,6 +5,8 @@ import About from "./components/About";
 import Navbar from "./components/Navbar";
 import CharacterListPage from "./pages/CharacterListPage";
 import CharacterDetailPage from "./pages/CharacterDetailPage";
+import DemoReducer from "./pages/DemoReducer";
+import TodosList from "./pages/TodosList";
 function App() {
   return (
     <div>
@@ -13,6 +15,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/characters-list" element={<CharacterListPage />} />
         <Route path="/character/:id" element={<CharacterDetailPage />} />
+        <Route path="/demo-reducer" element={<DemoReducer />} />
+        <Route path="/todos-list" element={<TodosList />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </div>
