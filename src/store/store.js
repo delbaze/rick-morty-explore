@@ -1,9 +1,45 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import themeReducer from "../slices/themeSlice";
+import favoritesReducer from "../slices/favoritesSlice";
+import {
+  FLUSH,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+  REHYDRATE,
+  persistReducer,
+  persistStore,
+} from "redux-persist";
+import storage from "redux-persist/es/storage";
 
-export const store = configureStore({
-  reducer: {
-    theme: themeReducer,
-    // favorites: favoriteReducer
-  },
+const rootReducer = combineReducers({
+  theme: themeReducer,
+  favorites: favoritesReducer,
 });
+const persistConfig = {
+  version: 1,
+  key: "root",
+  storage,
+  whitelist: ["favorites", "theme"],
+  // blacklist: ["theme"]
+};
+
+const persistedReducer = persistReducer(persistConfig, rootReducer);
+export const store = configureStore({
+  reducer: persistedReducer,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
+  // reducer: {
+  //   // theme: themeReducer,
+  //   // favorites: favoritesReducer,
+
+  // },
+});
+export const persistor = persistStore(store); // c'est le store persisté!!
+//serializableCheck
+// A non-serializable value was detected in the state

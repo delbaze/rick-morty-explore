@@ -1,18 +1,25 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router";
+import { PersistGate } from "redux-persist/integration/react";
 import "./index.css";
 import App from "./App.jsx";
-import { FavoritesProvider } from "./contexts/FavoritesContext.jsx";
+// import { FavoritesProvider } from "./contexts/FavoritesContext.jsx";
 import { Provider } from "react-redux";
-import { store } from "./store/store.js";
+import { persistor, store } from "./store/store.js";
 
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
-      <FavoritesProvider>
+      {/* <FavoritesProvider> */}
+      <PersistGate
+        // loading={<Loader />}
+        loading={<div>Chargement en cours...</div>}
+        persistor={persistor}
+      >
         <App />
-      </FavoritesProvider>
+      </PersistGate>
+      {/* </FavoritesProvider> */}
     </Provider>
   </BrowserRouter>,
 );

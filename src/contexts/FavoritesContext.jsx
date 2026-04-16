@@ -11,7 +11,8 @@ export const FavoritesContext = createContext({
 
 export function FavoritesProvider({ children }) {
   const [favorites, setFavorites] = useState(() => {
-    return JSON.parse(localStorage.getItem("favorites"));
+    const f = localStorage.getItem("favorites");
+    return f ? JSON.parse(f) : [];
   }); // [1, 30, 2]
 
   const addFavorites = (id) => {

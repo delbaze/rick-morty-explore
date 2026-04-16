@@ -1,8 +1,9 @@
-import { useFavorites } from "../contexts/FavoritesContext";
+// import { useFavorites } from "../contexts/FavoritesContext";
+import { useFavorites } from "../hooks/useFavorites";
 import "./CharacterList.css";
 import { Link } from "react-router";
 function CharacterList({ characters }) {
-  const { isFavorite, addFavorites, removeFromFavorites } = useFavorites();
+  const { isFavorite, addFavorites, removeFavorites } = useFavorites();
   return (
     <div className="blocImage">
       {characters.length > 0 ? (
@@ -16,9 +17,11 @@ function CharacterList({ characters }) {
               <div>
                 <p>{c.name}</p>
                 <button
-                  style={{ backgroundColor: isFav ? "green" : "gray" }}
+                  style={{
+                    backgroundColor: isFav ? "green" : "gray",
+                  }}
                   onClick={() =>
-                    isFav ? removeFromFavorites(c.id) : addFavorites(c.id)
+                    isFav ? removeFavorites(c.id) : addFavorites(c.id)
                   }
                 >
                   {isFav ? "-" : "+"}

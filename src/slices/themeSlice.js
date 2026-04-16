@@ -13,6 +13,7 @@ const themeSlice = createSlice({
       return action.payload;
     },
   },
+  
 });
 
 const { actions, reducer } = themeSlice;
