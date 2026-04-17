@@ -1,10 +1,16 @@
+import { useDispatch } from "react-redux";
+
 // import { Fragment } from "react";
 function Pagination({ pagesArray, page, setPage }) {
+  const dispatch = useDispatch();
   return (
     <div>
       {page && (
         <>
-          <button disabled={page === 1} onClick={() => setPage(page - 1)}>
+          <button
+            disabled={page === 1}
+            onClick={() => dispatch(setPage(page - 1))}
+          >
             Page précédente
           </button>
           {pagesArray.map((p) => {
@@ -15,7 +21,7 @@ function Pagination({ pagesArray, page, setPage }) {
                   color: page === p ? "green" : "white",
                   fontWeight: page === p ? "bold" : "lighter",
                 }}
-                onClick={() => setPage(p)}
+                onClick={() => dispatch(setPage(p))}
               >
                 {p}
               </button>
@@ -23,7 +29,7 @@ function Pagination({ pagesArray, page, setPage }) {
           })}
           <button
             disabled={pagesArray.length === page}
-            onClick={() => setPage(page + 1)}
+            onClick={() => dispatch(setPage(page + 1))}
           >
             Page suivante
           </button>

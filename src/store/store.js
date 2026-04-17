@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import themeReducer from "../slices/themeSlice";
 import favoritesReducer from "../slices/favoritesSlice";
+import charactersReducer from "../slices/charactersSlice";
 import {
   FLUSH,
   PAUSE,
@@ -16,13 +17,14 @@ import storage from "redux-persist/es/storage";
 const rootReducer = combineReducers({
   theme: themeReducer,
   favorites: favoritesReducer,
+  characters: charactersReducer,
 });
 const persistConfig = {
   version: 1,
   key: "root",
   storage,
   whitelist: ["favorites", "theme"],
-  // blacklist: ["theme"]
+  // blacklist: ["characters"]
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
