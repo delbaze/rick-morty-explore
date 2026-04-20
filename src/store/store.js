@@ -3,7 +3,7 @@ import themeReducer from "../slices/themeSlice";
 import favoritesReducer from "../slices/favoritesSlice";
 import charactersReducer from "../slices/charactersSlice";
 import notificationsReducer from "../slices/notificationsSlice";
-
+import { charactersApi } from "../slices/charactersApi";
 import { loggerMiddleware } from "../middlewares/logger.middleware";
 import { guardFavoritesMiddleware } from "../middlewares/guardFavorites.middleware";
 import {
@@ -22,6 +22,8 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   favorites: favoritesReducer,
   characters: charactersReducer,
+  [charactersApi.reducerPath]: charactersApi.reducer,
+  // charactersApi: charactersApi.reducer,
   notifications: notificationsReducer,
 });
 const persistConfig = {
@@ -42,7 +44,8 @@ export const store = configureStore({
       },
     })
       // .concat(loggerMiddleware)
-      .concat(guardFavoritesMiddleware),
+      .concat(guardFavoritesMiddleware)
+      .concat(charactersApi.middleware),
   // reducer: {
   //   // theme: themeReducer,
   //   // favorites: favoritesReducer,
