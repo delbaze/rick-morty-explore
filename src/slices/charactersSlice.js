@@ -49,10 +49,9 @@ const charactersSlice = createSlice({
         }
       )
       .addCase(maDemo.fulfilled, (state, action) => {
-        console.log("ACTIOn", action.payload);
         current(state).items.forEach((i) => {
           if (action.payload.includes(i.id)) {
-            console.log(i);
+            // console.log(i);
           }
         });
       });

@@ -2,6 +2,10 @@ import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import themeReducer from "../slices/themeSlice";
 import favoritesReducer from "../slices/favoritesSlice";
 import charactersReducer from "../slices/charactersSlice";
+import notificationsReducer from "../slices/notificationsSlice";
+
+import { loggerMiddleware } from "../middlewares/logger.middleware";
+import { guardFavoritesMiddleware } from "../middlewares/guardFavorites.middleware";
 import {
   FLUSH,
   PAUSE,
@@ -18,6 +22,7 @@ const rootReducer = combineReducers({
   theme: themeReducer,
   favorites: favoritesReducer,
   characters: charactersReducer,
+  notifications: notificationsReducer,
 });
 const persistConfig = {
   version: 1,
@@ -35,7 +40,9 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
+    })
+      // .concat(loggerMiddleware)
+      .concat(guardFavoritesMiddleware),
   // reducer: {
   //   // theme: themeReducer,
   //   // favorites: favoritesReducer,

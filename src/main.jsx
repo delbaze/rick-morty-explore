@@ -7,7 +7,7 @@ import App from "./App.jsx";
 // import { FavoritesProvider } from "./contexts/FavoritesContext.jsx";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store.js";
-
+import { ToastContainer } from "react-toastify";
 createRoot(document.getElementById("root")).render(
   <BrowserRouter>
     <Provider store={store}>
@@ -17,6 +17,7 @@ createRoot(document.getElementById("root")).render(
         loading={<div>Chargement en cours...</div>}
         persistor={persistor}
       >
+        <ToastContainer />
         <App />
       </PersistGate>
       {/* </FavoritesProvider> */}
