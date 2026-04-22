@@ -1,13 +1,16 @@
+import { lazy } from "react";
 import { Routes, Route } from "react-router";
 import "./App.css";
 import Home from "./components/Home";
 import About from "./components/About";
 import Navbar from "./components/Navbar";
-import CharacterListPage from "./pages/CharacterListPage";
-import CharacterDetailPage from "./pages/CharacterDetailPage";
+// import CharacterDetailPage from "./pages/CharacterDetailPage";
 import DemoReducer from "./pages/DemoReducer";
 import TodosList from "./pages/TodosList";
-import CharacterListPageRTK from "./pages/CharacterListPageRTK";
+
+// import CharacterListPageRTK from "./pages/CharacterListPageRTK"; // pas lazy
+const CharacterListPageRTK = lazy(() => import("./pages/CharacterListPageRTK")); // lazy
+const CharacterDetailPage = lazy(() => import("./pages/CharacterDetailPage")); // lazy
 function App() {
   return (
     <div>

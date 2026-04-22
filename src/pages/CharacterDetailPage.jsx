@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router";
-
+// import { maMethode } from "../utilities";
 function CharacterDetailPage() {
   const { id } = useParams();
   const [character, setCharacter] = useState({});
@@ -34,7 +34,13 @@ function CharacterDetailPage() {
   if (error) {
     return <div>{error}</div>;
   }
-
+  const handleClick = () => {
+    // maMethode()
+    //import dynamique
+    import("../utilities").then((utilities) => {
+      utilities.maMethode();
+    });
+  };
   return (
     <div>
       <h1>{character.name}</h1>
@@ -46,6 +52,7 @@ function CharacterDetailPage() {
         <li>Origin : {character.origin.name}</li>
         <li>Nombre d'épisodes : {character.episode.length}</li>
       </ul>
+      <button onClick={handleClick}>Test</button>
     </div>
   );
 }

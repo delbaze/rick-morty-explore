@@ -7,7 +7,7 @@ function MonComposant({ data, setState }) {
         ) : (
           <>
             {data.map((s) => (
-              <li>{s}</li>
+              <li key={s}>{s}</li>
             ))}
             <button onClick={() => setState(["d", "e", "f"])}>
               Mettre à jour le tableau
