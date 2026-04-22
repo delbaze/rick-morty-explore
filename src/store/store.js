@@ -3,6 +3,7 @@ import themeReducer from "../slices/themeSlice";
 import favoritesReducer from "../slices/favoritesSlice";
 import charactersReducer from "../slices/charactersSlice";
 import notificationsReducer from "../slices/notificationsSlice";
+import authReducer from "../slices/authSlice";
 import { charactersApi } from "../slices/charactersApi";
 import { loggerMiddleware } from "../middlewares/logger.middleware";
 import { guardFavoritesMiddleware } from "../middlewares/guardFavorites.middleware";
@@ -17,12 +18,15 @@ import {
   persistStore,
 } from "redux-persist";
 import storage from "redux-persist/es/storage";
+import { authApi } from "../slices/authApi";
 
 const rootReducer = combineReducers({
   theme: themeReducer,
   favorites: favoritesReducer,
   characters: charactersReducer,
+  auth: authReducer,
   [charactersApi.reducerPath]: charactersApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
   // charactersApi: charactersApi.reducer,
   notifications: notificationsReducer,
 });
@@ -45,7 +49,8 @@ export const store = configureStore({
     })
       // .concat(loggerMiddleware)
       .concat(guardFavoritesMiddleware)
-      .concat(charactersApi.middleware),
+      .concat(charactersApi.middleware)
+      .concat(authApi.middleware),
   // reducer: {
   //   // theme: themeReducer,
   //   // favorites: favoritesReducer,

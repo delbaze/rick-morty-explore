@@ -8,7 +8,9 @@ import Navbar from "./components/Navbar";
 import DemoReducer from "./pages/DemoReducer";
 import TodosList from "./pages/TodosList";
 import TabSwitcherPage from "./pages/TabSwitcherPage";
-import RenderPropsPage from "./pages/RenderPropsPage";
+// import RenderPropsPage from "./pages/RenderPropsPage";
+import LoginPage from "./pages/LoginPage";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // import CharacterListPageRTK from "./pages/CharacterListPageRTK"; // pas lazy
 const CharacterListPageRTK = lazy(() => import("./pages/CharacterListPageRTK")); // lazy
@@ -24,9 +26,12 @@ function App() {
         <Route path="/character/:id" element={<CharacterDetailPage />} />
         <Route path="/demo-reducer" element={<DemoReducer />} />
         <Route path="/todos-list" element={<TodosList />} />
-        <Route path="/about" element={<About />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/about" element={<About />} />
+        </Route>
         <Route path="/tab-switcher" element={<TabSwitcherPage />} />
-        <Route path="/render-props" element={<RenderPropsPage />} />
+        {/* <Route path="/render-props" element={<RenderPropsPage />} /> */}
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </div>
   );
