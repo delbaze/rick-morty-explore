@@ -20,6 +20,7 @@ export const charactersApi = createApi({
         params.set("page", page);
         return `/character?${params.toString()}`;
       },
+    
     }),
     // getCharacterById: builder.query({}), // useGetCharacterByIdQuery
   }),
