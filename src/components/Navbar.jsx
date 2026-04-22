@@ -21,7 +21,7 @@ function Navbar() {
   };
   return (
     <nav style={{ display: "flex", justifyContent: "space-between" }}>
-      <MyInput ref={inputRef} />
+      {/* <MyInput ref={inputRef} /> */}
       <button onClick={handleClick}>Click</button>
       {/* <MonComposantIntermediaire info="toto" />
       <MonComposant tata="toto" /> */}
@@ -31,6 +31,8 @@ function Navbar() {
         <NavLink to="/demo-reducer">Démo reducer</NavLink>
         <NavLink to="/todos-list">TodosList</NavLink>
         <NavLink to="/about">À propos</NavLink>
+        <NavLink to="/tab-switcher">Tab switcher</NavLink>
+        <NavLink to="/render-props">Render props</NavLink>
       </div>
       <div style={{ color: "red" }}>{notificationMessage}</div>
       <div>
